@@ -3,8 +3,8 @@
 ### 1. Clone repo
 
 ```
-$ git clone git@github.com:basir/node-react-ecommerce.git
-$ cd node-react-ecommerce
+$ git clone https://github.com/kranthikiran208/Boomazon.git
+$ cd Boomazon
 ```
 
 ### 2. Install MongoDB
