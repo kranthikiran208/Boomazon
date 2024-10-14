@@ -1,0 +1,58 @@
+import { createStore, combineReducers, applyMiddleware, compose } from 'redux';
+import thunk from 'redux-thunk';
+import Cookie from 'js-cookie';
+import {
+  bookListReducer,
+  bookDetailsReducer,
+  bookSaveReducer,
+  bookDeleteReducer,
+  bookReviewSaveReducer,
+} from './reducers/bookReducers';
+import { cartReducer } from './reducers/cartReducers';
+import {
+  userSigninReducer,
+  userRegisterReducer,
+  userUpdateReducer,
+} from './reducers/userReducers';
+import {
+  orderCreateReducer,
+  orderDetailsReducer,
+  orderPayReducer,
+  myOrderListReducer,
+  orderListReducer,
+  orderDeleteReducer,
+} from './reducers/orderReducers';
+import {wishlistReducer} from './reducers/wishlistReducers';
+
+const cartItems = Cookie.getJSON('cartItems') || [];
+const userInfo = Cookie.getJSON('userInfo') || null;
+
+const initialState = {
+  cart: { cartItems, shipping: {}, payment: {} },
+  userSignin: { userInfo },
+};
+const reducer = combineReducers({
+  bookList: bookListReducer,
+  bookDetails: bookDetailsReducer,
+  cart: cartReducer,
+  userSignin: userSigninReducer,
+  userRegister: userRegisterReducer,
+  bookSave: bookSaveReducer,
+  wishlist: wishlistReducer,
+  bookDelete: bookDeleteReducer,
+  bookReviewSave: bookReviewSaveReducer,
+  orderCreate: orderCreateReducer,
+  orderDetails: orderDetailsReducer,
+  orderPay: orderPayReducer,
+  userUpdate: userUpdateReducer,
+  myOrderList: myOrderListReducer,
+  orderList: orderListReducer,
+  orderDelete: orderDeleteReducer,
+});
+const composeEnhancer = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+const store = createStore(
+  reducer,
+  initialState,
+  composeEnhancer(applyMiddleware(thunk))
+);
+export default store;
